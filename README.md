@@ -1,7 +1,9 @@
 # Automatic-Traffic-Light
 
 # C Code
-'''
+
+'''C
+
 #include <time.h>
 
 void turnOn(int);
