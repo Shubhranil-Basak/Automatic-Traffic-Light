@@ -11,7 +11,7 @@ int getValue(int);
 void turnOnYellow(int *, int, int, int *, time_t *);
 void turnOffLight(int *, int, int, int *);
 void ONLimit(int[], int[], int[], int[], int[]);
-void perform(int[], int[], int[], int[], int[], const int, int);
+void perform(int[], int[], int[], int[], int[], const int, int, int[]);
 void call(int [], int [], int [], int [], int [], int [], int [], int [], int);
 
 /*
@@ -105,8 +105,11 @@ void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
 {
 	const int RIGHT_TIME_LIMIT = 15;
 	const int STRAIGHT_TIME_LIMIT = 45;
-	perform(sensor1, sensor2, red, yellow, green, RIGHT_TIME_LIMIT, 1);
-	perform(sensor1, sensor2, red, yellow, green, STRAIGHT_TIME_LIMIT, 0);
+	
+	int greenOn[2] = {0, 0};
+	
+	perform(sensor1, sensor2, red, yellow, green, RIGHT_TIME_LIMIT, 1, greenOn);
+	perform(sensor1, sensor2, red, yellow, green, STRAIGHT_TIME_LIMIT, 0, greenOn);
 }
 
 /*
@@ -118,8 +121,9 @@ void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
  * @param green : Ports of green Light: Straight Lane 1, Right Lane 1, Straight Lane 2, Right Lane 2
  * @param Limit : The time limit
  * @param openStraight : If you want to go straight = 1; otherwise = 0
+ * @param greenOn : If you want to go straight then greenOn would store if the green signals are already on
  */
-void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[], const int LIMIT, int openStraight)
+void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[], const int LIMIT, int openStraight, int greenOn[])
 {
 		time_t start_time, current_time;
 		time(&start_time);
@@ -140,6 +144,17 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 		int yellow1 = 0, yellow2 = 0;
 		//We need to store the time when yellow light was turned on
 		time_t yellow1Start, yellow2Start;
+		
+		if(openStraight && greenOn[0])
+		{
+			red1 = 0;
+			green1 = 1;
+		}
+		if(openStraight && greenOn[1])
+		{
+			red2 = 0;
+			green2 = 1;
+		}
 
 		if(getValue(sensor1[pos]))
 			turnOffLight(&red1, red[pos], green[pos], &green1);
@@ -181,6 +196,9 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 				turnOn(green[2]);
 			}
 		}
+		
+		greenOn[0] = done1;
+		greenOn[1] = done2;
 }
 
 /* 
