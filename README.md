@@ -1,6 +1,7 @@
 # Automatic-Traffic-Light
 
-# C Code
+# Assembly Structure
+## Code
 
 ```C
 #include <time.h>
