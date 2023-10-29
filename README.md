@@ -2,8 +2,7 @@
 
 # C Code
 
-'''C
-
+```C
 #include <time.h>
 
 void turnOn(int);
@@ -275,4 +274,4 @@ int main(void)
 		}
     return 0;
 }
-'''
+```
