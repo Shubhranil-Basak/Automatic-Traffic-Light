@@ -103,8 +103,8 @@ void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
 	
 	int greenOn[2] = {0, 0};
 	
-	perform(sensor1, sensor2, red, yellow, green, RIGHT_TIME_LIMIT, 1, greenOn);
-	perform(sensor1, sensor2, red, yellow, green, STRAIGHT_TIME_LIMIT, 0, greenOn);
+	perform(sensor1, sensor2, red, yellow, green, RIGHT_TIME_LIMIT, 0, greenOn);
+	perform(sensor1, sensor2, red, yellow, green, STRAIGHT_TIME_LIMIT, 1, greenOn);
 }
 
 /*
@@ -115,17 +115,17 @@ void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
  * @param yellow : Ports of yellow Light: Straight Lane 1, Right Lane 1, Straight Lane 2, Right Lane 2
  * @param green : Ports of green Light: Straight Lane 1, Right Lane 1, Straight Lane 2, Right Lane 2
  * @param Limit : The time limit
- * @param openStraight : If you want to go straight = 1; otherwise = 0
+ * @param goStraight : If you want to go straight = 1; otherwise = 0
  * @param greenOn : If you want to go straight then greenOn would store if the green signals are already on
  */
-void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[], const int LIMIT, int openStraight, int greenOn[])
+void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[], const int LIMIT, int goStraight, int greenOn[])
 {
 	time_t start_time, current_time;
 	time(&start_time);
 		
 	//If going right, then pos = 1; otherwise = 0
 	int pos = 1;
-	if(!openStraight)
+	if(goStraight)
 		pos = 0; 		
 		
 	//For turning on green signals for going straight if this function is for going right
@@ -140,12 +140,12 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 	//We need to store the time when yellow light was turned on
 	time_t yellow1Start, yellow2Start;
 		
-	if(openStraight && greenOn[0])
+	if(goStraight && greenOn[0])
 	{
 		red1 = 0;
 		green1 = 1;
 	}
-	if(openStraight && greenOn[1])
+	if(goStraight && greenOn[1])
 	{
 		red2 = 0;
 		green2 = 1;
@@ -176,7 +176,7 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 			turnOffLight(&yellow2, yellow[pos + 2], red[pos + 2], &red2);
 			
 		//If this function performs for going right and the opposite lane already stopped going right then open up going straight for this side
-		if(openStraight && red2 && !done1 && getValue(sensor1[0]))
+		if(!goStraight && red2 && !done1 && getValue(sensor1[0]))
 		{
 			done1 = 1;
 			turnOff(red[0]);
@@ -184,7 +184,7 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 		}
 			
 		//If this function performs for going right and opposite lane already stopped going right then open up going straight for this side
-		if(openStraight && red1 && !done2 && getValue(sensor1[2]))
+		if(!goStraight && red1 && !done2 && getValue(sensor1[2]))
 		{
 			done2 = 1;
 			turnOff(red[2]);
