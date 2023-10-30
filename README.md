@@ -1,4 +1,4 @@
-# Automatic-Traffic-Light
+# Automatic Traffic Light
 This repository contains RISC-V based traffic light automation.
 # OVERVIEW
 Traffic lights usually consists of three signals through the usage of colors, arrows, and other images to convey various messages. Traffic lights are in sets of red, yellow, and green lights at intersection of roads. Traffic is then controlled as vehicles receive signals/messages of when to stop and when to go.
@@ -9,11 +9,9 @@ LED : https://tinyurl.com/yc5w423x : ₹125
 
 IR Sensors : https://tinyurl.com/8dybpmhn : ₹510
 # HOW DOES AN IR SENSOR WORK?
-IR LED is one kind of transmitter that emits IR radiation. This LED has the appearance of a standard LED, and the radiation it emits is not visible to the human eye. An infrared transmitter is used to detect the radiation by the infrared receivers. These infrared receivers are available in photodiode form. IR Photodiode are different from regular photodiodes in that they only detect IR radiation. Different types of infrared receivers exist based on voltage, wavelength, package, and other factors.
+An IR Sensor consists of an IR LED trasmitter that emits infrared radition. It has the same appearance as a standard LED, but the radiation it emits is not visible to the human eye. If an object blocks the pathway of the infrared waves, then the reflected radiations are detected by the infrared receivers. The sensor output can be decided by the IR receiver depending on the intensity of the response. These infrared receivers are available in photodiode form. IR photodiode are different from regular photodiodes in that they only detect IR radiation. Different types of infrared receivers exist based on voltage, wavelength, package, and other factors.
 
-When used as an IR transmitter and receiver, the wavelength of the receiver must watch that of the transmitter. The transmitter is an infrared LED, and the receiver is an infrared photodiode. The infrared photodiode is activated by the infrared light produced by an infrared LED. The photodiode’s resistance and the change in output voltage are proportional to the amount of infrared light obtained. This is the IR sensor’s fundamental working principle.
-
-Once the infrared transmitter generates emission, when it arrives at the object & some of the emission will reflect toward the infrared receiver. The sensor output can be decided by the IR receiver depending on the intensity of the response.
+When using an IR transmitter and receiver, the wavelength of the receiver must match that of the transmitter because the infrared photodiode is activated by the infrared light produced by the infrared LED. The photodiode’s resistance and the change in output voltage are proportional to the amount of infrared light obtained.
 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/148491110/366e8026-2149-45f1-b9e1-da7485ef315f)
 
