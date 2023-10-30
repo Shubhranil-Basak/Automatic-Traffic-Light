@@ -8,6 +8,13 @@ The project's goal is to design an automatic machine utilizing a specialized RIS
 LED : https://tinyurl.com/yc5w423x : ₹125
 
 IR Sensors : https://tinyurl.com/8dybpmhn : ₹510
+# HOW DOES AN IR SENSOR WORK?
+IR LED is one kind of transmitter that emits IR radiation. This LED has the appearance of a standard LED, and the radiation it emits is not visible to the human eye. An infrared transmitter is used to detect the radiation by the infrared receivers. These infrared receivers are available in photodiode form. IR Photodiode are different from regular photodiodes in that they only detect IR radiation. Different types of infrared receivers exist based on voltage, wavelength, package, and other factors.
+
+When used as an IR transmitter and receiver, the wavelength of the receiver must watch that of the transmitter. The transmitter is an infrared LED, and the receiver is an infrared photodiode. The infrared photodiode is activated by the infrared light produced by an infrared LED. The photodiode’s resistance and the change in output voltage are proportional to the amount of infrared light obtained. This is the IR sensor’s fundamental working principle.
+
+Once the infrared transmitter generates emission, when it arrives at the object & some of the emission will reflect toward the infrared receiver. The sensor output can be decided by the IR receiver depending on the intensity of the response.
+
 # GPIO
 
 x30[0] is an input pin from an IR Sensor from Side 1 for going straight.
