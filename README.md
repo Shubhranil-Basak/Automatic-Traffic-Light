@@ -1,5 +1,9 @@
 # Automatic-Traffic-Light
-
+This repository contains RISC-V based traffic light automation.
+# OVERVIEW
+Traffic lights usually consists of three signals through the usage of colors, arrows, and other images to convey various messages. Traffic lights are in sets of red, yellow, and green lights at intersection of roads. Traffic is then controlled as vehicles receive signals/messages of when to stop and when to go.
+# AIM
+The project's goal is to design an automatic machine utilizing a specialized RISC-V processor for controlling traffic by releasing a specific number of cars and pedestrians depending on whoever comes first. The objective of this program is to minimize traffic problems, energy consumption, and overall expenses. 
 # Assembly Structure using C
 
 ```C
