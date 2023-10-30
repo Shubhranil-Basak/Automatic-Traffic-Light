@@ -15,6 +15,11 @@ When used as an IR transmitter and receiver, the wavelength of the receiver must
 
 Once the infrared transmitter generates emission, when it arrives at the object & some of the emission will reflect toward the infrared receiver. The sensor output can be decided by the IR receiver depending on the intensity of the response.
 
+# IMAGE
+
+![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/148491110/366e8026-2149-45f1-b9e1-da7485ef315f)
+
+
 # GPIO
 
 x30[0] is an input pin from an IR Sensor from Side 1 for going straight.
