@@ -8,6 +8,41 @@ The project's goal is to design an automatic machine utilizing a specialized RIS
 LED : https://tinyurl.com/yc5w423x : ₹125
 
 IR Sensors : https://tinyurl.com/8dybpmhn : ₹510
+# GPIO
+
+x30[0] is an input pin from an IR Sensor from Side 1 for going straight
+x30[1] is an input pin from an IR Sensor from Side 2 for going straight
+x30[2] is an input pin from an IR Sensor form Side 3 for going straight
+x30[3] is an input pin from an IR Sensor from Side 4 for going straight
+x30[4] is an input pin from an IR Sensor from Side 1 for going right
+x30[5] is an input pin from an IR Sensor from Side 2 for going right
+x30[6] is an input pin from an IR Sensor form Side 3 for going right
+x30[7] is an input pin from an IR Sensor from Side 4 for going right
+x30[8] is an output pin for a Red LED for Side 1 for going straight
+x30[9] is an output pin for a Red LED for Side 2 for going straight
+x30[10] is an output pin for a Red LED for Side 3 for going straight
+x30[11] is an output pin for a Red LED for Side 4 for going straight
+x30[12] is an output pin for a Red LED for Side 1 for going right
+x30[13] is an output pin for a Red LED for Side 2 for going right
+x30[14] is an output pin for a Red LED for Side 3 for going right
+x30[15] is an output pin for a Red LED for Side 4 for going right
+x30[16] is an output pin for a Yellow LED for Side 1 for going straight
+x30[17] is an output pin for a Yellow LED for Side 2 for going straight
+x30[18] is an output pin for a Yellow LED for Side 3 for going straight
+x30[19] is an output pin for a Yellow LED for Side 4 for going straight
+x30[20] is an output pin for a Yellow LED for Side 1 for going right
+x30[21] is an output pin for a Yellow LED for Side 2 for going right
+x30[22] is an output pin for a Yellow LED for Side 3 for going right
+x30[23] is an output pin for a Yellow LED for Side 4 for going right
+x30[24] is an output pin for a Green LED for Side 1 for going straight
+x30[25] is an output pin for a Green LED for Side 2 for going straight
+x30[26] is an output pin for a Green LED for Side 3 for going straight
+x30[27] is an output pin for a Green LED for Side 4 for going straight
+x30[28] is an output pin for a Green LED for Side 1 for going right
+x30[29] is an output pin for a Green LED for Side 2 for going right
+x30[30] is an output pin for a Green LED for Side 3 for going right
+x30[31] is an output pin for a Green LED for Side 4 for going right
+
 # Assembly Structure using C
 
 ```C
