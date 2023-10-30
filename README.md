@@ -20,7 +20,6 @@ Once the infrared transmitter generates emission, when it arrives at the object 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/148491110/366e8026-2149-45f1-b9e1-da7485ef315f)
 
 # CIRCUIT DIAGRAM 
-# IMAGE
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/148491110/67b264b3-0fdf-4643-b2a8-c0ca7bab6cc5)
 
 
