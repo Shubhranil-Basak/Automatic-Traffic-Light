@@ -18,7 +18,9 @@ Once the infrared transmitter generates emission, when it arrives at the object 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/148491110/366e8026-2149-45f1-b9e1-da7485ef315f)
 
 
-# GPIO
+# REGISTER ARCHITECTURE for x30 for GPIOs
+
+![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/148491110/c6fd4ddc-8b65-4447-9a75-fb0c106bfc71)
 
 x30[0] is an input pin from an IR Sensor from Side 1 for going straight.
 
