@@ -8,15 +8,29 @@ The project's goal is to design an automatic machine utilizing a specialized RIS
 
 ```C
 #include <time.h>
+#include <stdlib.h>
 
+int randomNumber(int, int);
 void turnOn(int);
 void turnOff(int);
 int getValue(int);
 void turnOnYellow(int *, int, int, int *, time_t *);
 void turnOffLight(int *, int, int, int *);
+void turnOffRandomLight(int, int, int);
 void ONLimit(int[], int[], int[], int[], int[]);
 void perform(int[], int[], int[], int[], int[], const int, int, int[]);
-void call(int [], int [], int [], int [], int [], int [], int [], int [], int);
+void call(int[], int[], int[], int[], int[], int[], int[], int[], int);
+
+/*
+ * Outputs a random number between lower and upper.
+ * @param lower : lower bound
+ * @param upper : upper bound
+ */
+int randomNumber(int lower, int upper)
+{
+    srand(time(NULL));
+    return (rand() % (upper - lower + 1));
+}
 
 /*
  * Turns on the LED at port "port"
@@ -79,7 +93,7 @@ void turnOnYellow(int * green, int greenLED, int yellowLED, int * yellow, time_t
 	turnOff(greenLED);
 	turnOn(yellowLED);
 	*yellow = 1;
-	time(yellowStart);
+	*yellowStart = time(NULL);
 }
 
 /*
@@ -95,6 +109,28 @@ void turnOffLight(int * lightOff, int lightOffLED, int lightOnLED, int * lightOn
 	turnOff(lightOffLED);
 	turnOn(lightOnLED);
 	*lightOn = 1;
+}
+
+/* 
+ * Turns off the random light that is used when there is no traffic.
+ * @param red: the port of the red light
+ * @param yellow: the port of the yellow light
+ * @param green: the port of the green light
+ */
+void turnOffRandomLight(int red, int yellow, int green)
+{
+	time_t startTime, currTime;
+	
+	startTime = time(NULL);
+	currTime = time(NULL);
+	
+	turnOff(green);
+	turnOn(yellow);
+	while(difftime(currTime, startTime) <= 1)
+		currTime = time(NULL);
+	
+	turnOff(yellow);
+	turnOn(red);
 }
 
 /*
@@ -129,8 +165,8 @@ void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
  */
 void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[], const int LIMIT, int goStraight, int greenOn[])
 {
-	time_t start_time, current_time;
-	time(&start_time);
+	time_t startTime, currentTime;
+	startTime = time(NULL);
 		
 	//If going right, then pos = 1; otherwise = 0
 	int pos = 1;
@@ -165,23 +201,23 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 	if(getValue(sensor2[pos]))
 		turnOffLight(&red2, red[pos + 2], green[pos + 2], &green2);
 		
-	time(&current_time);
+	currentTime = time(NULL);
 		
 	//After this loop, only red light would be turned on if you want to go straight.
 	//If you want to go right, it is possible that the going straight light would be on.
 	//However, going right light would be off.
 	while(!red1 || !red2)
 	{
-		if(green1 && (getValue(sensor1[pos]) == 0 || difftime(current_time, start_time) >= LIMIT))
+		if(green1 && (getValue(sensor1[pos]) == 0 || difftime(currentTime, startTime) >= LIMIT))
 			turnOnYellow(&green1, green[pos], yellow[pos], &yellow1, &yellow1Start);
-		if(green2 && (getValue(sensor2[pos]) == 0 || difftime(current_time, start_time) >= LIMIT))
+		if(green2 && (getValue(sensor2[pos]) == 0 || difftime(currentTime, startTime) >= LIMIT))
 			turnOnYellow(&green2, green[pos + 2], yellow[pos + 2], &yellow2, &yellow2Start);
 
-		time(&current_time);
+		currentTime = time(NULL);
 
-		if(yellow1 && difftime(current_time, yellow1Start) >= 1)
+		if(yellow1 && difftime(currentTime, yellow1Start) >= 1)
 			turnOffLight(&yellow1, yellow[pos], red[pos], &red1);
-		if(yellow2 && difftime(current_time, yellow2Start) >= 1)
+		if(yellow2 && difftime(currentTime, yellow2Start) >= 1)
 			turnOffLight(&yellow2, yellow[pos + 2], red[pos + 2], &red2);
 			
 		//If this function performs for going right and the opposite lane already stopped going right then open up going straight for this side
@@ -268,6 +304,9 @@ int main(void)
 			: "x30"
 		);
 
+		int rand = randomNumber(0, 3);
+		int on = 0;
+		
 		while(1)
 		{
 			int count = 0;
@@ -275,22 +314,40 @@ int main(void)
 				if(getValue(sensors[0]) || getValue(sensors_right[0]))
 					count++;
 			
-			if(count == 4 || count == 3)
+			if(count != 0)
 			{
-				call(sensors, sensors_right, red, red_right, yellow, yellow_right, green, green_right, open);
-				open = (open + 2) % 4;	
-				call(sensors, sensors_right, red, red_right, yellow, yellow_right, green, green_right, open);				
-				open = (open + 2) % 4;
-			}
-			else if(count == 2 || count == 1)
-			{
-				if(getValue(sensors[open]) || getValue(sensors_right[open]) || getValue(sensors[open + 1]) || getValue(sensors_right[open + 1]))
-					call(sensors, sensors_right, red, red_right, yellow, yellow_right, green, green_right, open);
-				open = (open + 2) % 4;
-				if(getValue(sensors[open]) || getValue(sensors_right[open]) || getValue(sensors[open + 1]) || getValue(sensors_right[open + 1]))
+				if(on)
+				{
+					turnOffRandomLight(red[rand], yellow[rand], green[rand]);
+					on = 0;
+					rand = randomNumber(0, 3);
+				}
+				if(count == 4 || count == 3)
 				{
 					call(sensors, sensors_right, red, red_right, yellow, yellow_right, green, green_right, open);
+					open = (open + 2) % 4;	
+					call(sensors, sensors_right, red, red_right, yellow, yellow_right, green, green_right, open);				
 					open = (open + 2) % 4;
+				}
+				else if(count == 2 || count == 1)
+				{
+					if(getValue(sensors[open]) || getValue(sensors_right[open]) || getValue(sensors[open + 1]) || getValue(sensors_right[open + 1]))
+						call(sensors, sensors_right, red, red_right, yellow, yellow_right, green, green_right, open);
+					open = (open + 2) % 4;
+					if(getValue(sensors[open]) || getValue(sensors_right[open]) || getValue(sensors[open + 1]) || getValue(sensors_right[open + 1]))
+					{
+						call(sensors, sensors_right, red, red_right, yellow, yellow_right, green, green_right, open);
+						open = (open + 2) % 4;
+					}
+				}
+			}
+			else
+			{
+				if(!on)
+				{
+					turnOff(red[rand]);
+					turnOn(green[rand]);
+					on = 1;
 				}
 			}
 		}
