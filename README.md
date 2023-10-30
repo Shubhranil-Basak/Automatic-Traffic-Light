@@ -62,7 +62,7 @@ int getValue(int port)
 		:
 		:"x30"
 	);
-	return (result >> port) % 10;
+	return (result >> port) & 1;
 }
 
 /*
