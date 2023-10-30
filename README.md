@@ -22,11 +22,11 @@ void turnOn(int port)
 {
 	int pin_mask = 1 << port;
 	asm volatile(
-			"ori x30, x30, %0\n\t"
-			:
-			: "i"(pin_mask)
-			: "x30"
-		);
+		"ori x30, x30, %0\n\t"
+		:
+		: "i"(pin_mask)
+		: "x30"
+	);
 }
 
 /*
@@ -125,80 +125,80 @@ void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
  */
 void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[], const int LIMIT, int openStraight, int greenOn[])
 {
-		time_t start_time, current_time;
-		time(&start_time);
+	time_t start_time, current_time;
+	time(&start_time);
 		
-		//If going right, then pos = 1; otherwise = 0
-		int pos = 1;
-		if(!openStraight)
-			pos = 0; 		
+	//If going right, then pos = 1; otherwise = 0
+	int pos = 1;
+	if(!openStraight)
+		pos = 0; 		
 		
-		//For turning on green signals for going straight if this function is for going right
-		int done1 = 0, done2 = 0;
+	//For turning on green signals for going straight if this function is for going right
+	int done1 = 0, done2 = 0;
 
-		//If red light is on then value is 1; otherwise it is 0
-		int red1 = 1, red2 = 1;
-		//If green light is on then value is 1; otherwise it is 0
-		int green1 = 0, green2 = 0;
-		//If yellow light is on then value is 1; otherwise it is 0
-		int yellow1 = 0, yellow2 = 0;
-		//We need to store the time when yellow light was turned on
-		time_t yellow1Start, yellow2Start;
+	//If red light is on then value is 1; otherwise it is 0
+	int red1 = 1, red2 = 1;
+	//If green light is on then value is 1; otherwise it is 0
+	int green1 = 0, green2 = 0;
+	//If yellow light is on then value is 1; otherwise it is 0
+	int yellow1 = 0, yellow2 = 0;
+	//We need to store the time when yellow light was turned on
+	time_t yellow1Start, yellow2Start;
 		
-		if(openStraight && greenOn[0])
-		{
-			red1 = 0;
-			green1 = 1;
-		}
-		if(openStraight && greenOn[1])
-		{
-			red2 = 0;
-			green2 = 1;
-		}
+	if(openStraight && greenOn[0])
+	{
+		red1 = 0;
+		green1 = 1;
+	}
+	if(openStraight && greenOn[1])
+	{
+		red2 = 0;
+		green2 = 1;
+	}
 
-		if(getValue(sensor1[pos]))
-			turnOffLight(&red1, red[pos], green[pos], &green1);
-		if(getValue(sensor2[pos]))
-			turnOffLight(&red2, red[pos + 2], green[pos + 2], &green2);
+	if(getValue(sensor1[pos]))
+		turnOffLight(&red1, red[pos], green[pos], &green1);
+	if(getValue(sensor2[pos]))
+		turnOffLight(&red2, red[pos + 2], green[pos + 2], &green2);
 		
+	time(&current_time);
+		
+	//After this loop, only red light would be turned on if you want to go straight.
+	//If you want to go right, it is possible that the going straight light would be on.
+	//However, going right light would be off.
+	while(!red1 || !red2)
+	{
+		if(green1 && (getValue(sensor1[pos]) == 0 || difftime(current_time, start_time) >= LIMIT))
+			turnOnYellow(&green1, green[pos], yellow[pos], &yellow1, &yellow1Start);
+		if(green2 && (getValue(sensor2[pos]) == 0 || difftime(current_time, start_time) >= LIMIT))
+			turnOnYellow(&green2, green[pos + 2], yellow[pos + 2], &yellow2, &yellow2Start);
+
 		time(&current_time);
-		
-		//After this loop, only red light would be turned on if you want to go straight.
-		//If you want to go right, it is possible that the going straight light would be on.
-		//However, going right light would be off.
-		while(!red1 || !red2)
+
+		if(yellow1 && difftime(current_time, yellow1Start) >= 1)
+			turnOffLight(&yellow1, yellow[pos], red[pos], &red1);
+		if(yellow2 && difftime(current_time, yellow2Start) >= 1)
+			turnOffLight(&yellow2, yellow[pos + 2], red[pos + 2], &red2);
+			
+		//If this function performs for going right and the opposite lane already stopped going right then open up going straight for this side
+		if(openStraight && red2 && !done1 && getValue(sensor1[0]))
 		{
-			if(green1 && (getValue(sensor1[pos]) == 0 || difftime(current_time, start_time) >= LIMIT))
-				turnOnYellow(&green1, green[pos], yellow[pos], &yellow1, &yellow1Start);
-			if(green2 && (getValue(sensor2[pos]) == 0 || difftime(current_time, start_time) >= LIMIT))
-				turnOnYellow(&green2, green[pos + 2], yellow[pos + 2], &yellow2, &yellow2Start);
-
-			time(&current_time);
-
-			if(yellow1 && difftime(current_time, yellow1Start) >= 1)
-				turnOffLight(&yellow1, yellow[pos], red[pos], &red1);
-			if(yellow2 && difftime(current_time, yellow2Start) >= 1)
-				turnOffLight(&yellow2, yellow[pos + 2], red[pos + 2], &red2);
-			
-			//If this function performs for going right and the opposite lane already stopped going right then open up going straight for this side
-			if(openStraight && red2 && !done1 && getValue(sensor1[0]))
-			{
-				done1 = 1;
-				turnOff(red[0]);
-				turnOn(green[0]);
-			}
-			
-			//If this function performs for going right and opposite lane already stopped going right then open up going straight for this side
-			if(openStraight && red1 && !done2 && getValue(sensor1[2]))
-			{
-				done2 = 1;
-				turnOff(red[2]);
-				turnOn(green[2]);
-			}
+			done1 = 1;
+			turnOff(red[0]);
+			turnOn(green[0]);
 		}
+			
+		//If this function performs for going right and opposite lane already stopped going right then open up going straight for this side
+		if(openStraight && red1 && !done2 && getValue(sensor1[2]))
+		{
+			done2 = 1;
+			turnOff(red[2]);
+			turnOn(green[2]);
+		}
+	}
 		
-		greenOn[0] = done1;
-		greenOn[1] = done2;
+	greenOn[0] = done1;
+	greenOn[1] = done2;
 }
 
 /* 
@@ -214,13 +214,13 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
  */
 void call(int sensors[], int sensors_right[], int red[], int red_right[], int yellow[], int yellow_right[], int green[], int green_right[], int open)
 {
-				//Parameters of ONLimit
-				int inp_sensor1[2] = { sensors[open], sensors_right[open] };
-				int inp_sensor2[2] = { sensors[open + 1], sensors_right[open + 1] };
-				int inp_Red[4]     = { red[open], red_right[open], red[open + 1], red_right[open + 1] };
-				int inp_Yellow[4]  = { yellow[open], yellow_right[open], yellow[open + 1], yellow_right[open + 1] };
-				int inp_Green[4]   = { green[open], green_right[open], green[open + 1], green_right[open + 1] };
-				ONLimit(inp_sensor1, inp_sensor2, inp_Red, inp_Yellow, inp_Green);
+		//Parameters of ONLimit
+		int inp_sensor1[2] = { sensors[open], sensors_right[open] };
+		int inp_sensor2[2] = { sensors[open + 1], sensors_right[open + 1] };
+		int inp_Red[4]     = { red[open], red_right[open], red[open + 1], red_right[open + 1] };
+		int inp_Yellow[4]  = { yellow[open], yellow_right[open], yellow[open + 1], yellow_right[open + 1] };
+		int inp_Green[4]   = { green[open], green_right[open], green[open + 1], green_right[open + 1] };
+		ONLimit(inp_sensor1, inp_sensor2, inp_Red, inp_Yellow, inp_Green);
 }
 
 int main(void)
