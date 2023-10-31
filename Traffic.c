@@ -13,6 +13,10 @@ void ONLimit(int[], int[], int[], int[], int[]);
 void perform(int[], int[], int[], int[], int[], const int, int, int[]);
 void call(int[], int[], int[], int[], int[], int[], int[], int[], int);
 int hardware[32];
+for(int i = 0; i < 32; i++){
+	hardware[i] = 0;
+}
+
 
 void print(){
     for(int i = 8, j = 1; i <= 11; i++, j++){
