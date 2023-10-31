@@ -91,6 +91,7 @@ x30[31] is an output pin for a Green LED for Side 4 for going right.
 
 ```C
 #include <time.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int randomNumber(int, int);
@@ -103,12 +104,43 @@ void turnOffRandomLight(int, int, int);
 void ONLimit(int[], int[], int[], int[], int[]);
 void perform(int[], int[], int[], int[], int[], const int, int, int[]);
 void call(int[], int[], int[], int[], int[], int[], int[], int[], int);
+int hardware[32];
+
+void print(){
+    for(int i = 8, j = 1; i <= 11; i++, j++){
+		if(hardware[i])
+	        printf("Red light straight at side %d is on\n", j);
+    }
+    for(int i = 12, j = 1; i <= 15; i++, j++){
+		if(hardware[i])
+        	printf("%d Red light right at side %d\n", hardware[i], j);
+    }
+    for(int i = 16, j = 1; i <= 19; i++, j++){
+		if(hardware[i])
+        	printf("%d Yellow light straight at side %d\n", hardware[i], j);
+    }
+    for(int i = 20, j = 1; i <= 23; i++, j++){
+		if(hardware[i])
+        	printf("%d Yellow light right at side %d\n", hardware[i], j);
+    }
+    for(int i = 24, j = 1; i <= 27; i++, j++){
+		if(hardware[i])
+        	printf("%d Green light straight at side %d\n", hardware[i], j);
+    }
+    for(int i = 28, j = 1; i <= 31; i++, j++){
+		if(hardware[i])
+        	printf("%d Green light right at side %d\n", hardware[i], j);
+    }
+
+	printf("\n\n");
+}
 
 /*
  * Outputs a random number between lower and upper.
  * @param lower : lower bound
  * @param upper : upper bound
  */
+
 int randomNumber(int lower, int upper)
 {
     srand(time(NULL));
@@ -122,12 +154,7 @@ int randomNumber(int lower, int upper)
 void turnOn(int port)
 {
 	int pin_mask = 1 << port;
-	asm volatile(
-		"ori x30, x30, %0\n\t"
-		:
-		: "i"(pin_mask)
-		: "x30"
-	);
+	hardware[port] = 1;
 }
 
 /*
@@ -137,12 +164,7 @@ void turnOn(int port)
 void turnOff(int port)
 {
 	int pin_mask = ~(1 << port);
-	asm volatile(
-		"andi x30, x30, %0\n\t"
-		:
-		: "i"(pin_mask)
-		: "x30"
-	);
+	hardware[port] = 0;
 }
 
 /*
@@ -152,14 +174,7 @@ void turnOff(int port)
  */
 int getValue(int port)
 {
-	int result = 0;
-	asm volatile(
-		"lw %0, x30\n\t"
-		:"=r"(result)
-		:
-		:"x30"
-	);
-	return (result >> port) & 1;
+	return hardware[port];
 }
 
 /*
@@ -209,11 +224,13 @@ void turnOffRandomLight(int red, int yellow, int green)
 	
 	turnOff(green);
 	turnOn(yellow);
-	while(difftime(currTime, startTime) <= 1)
+    print();
+	while(difftime(currTime, startTime) <= 1){
 		currTime = time(NULL);
-	
+    }
 	turnOff(yellow);
 	turnOn(red);
+    print();
 }
 
 /*
@@ -226,8 +243,8 @@ void turnOffRandomLight(int red, int yellow, int green)
  */
 void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
 {
-	const int RIGHT_TIME_LIMIT = 15;
-	const int STRAIGHT_TIME_LIMIT = 45;
+	const int RIGHT_TIME_LIMIT = 5;
+	const int STRAIGHT_TIME_LIMIT = 5;
 	
 	int greenOn[2] = {0, 0};
 	
@@ -253,9 +270,9 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 		
 	//If going right, then pos = 1; otherwise = 0
 	int pos = 1;
-	if(goStraight)
-		pos = 0; 		
-		
+	if(goStraight){
+		pos = 0;
+    }
 	//For turning on green signals for going straight if this function is for going right
 	int done1 = 0, done2 = 0;
 
@@ -285,6 +302,7 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 		turnOffLight(&red2, red[pos + 2], green[pos + 2], &green2);
 		
 	currentTime = time(NULL);
+    print();
 		
 	//After this loop, only red light would be turned on if you want to go straight.
 	//If you want to go right, it is possible that the going straight light would be on.
@@ -318,6 +336,7 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 			turnOff(red[2]);
 			turnOn(green[2]);
 		}
+        print();
 	}
 		
 	greenOn[0] = done1;
@@ -361,42 +380,30 @@ int main(void)
 		int yellow_right[4] = {20, 21, 22, 23};
 		int green[4] = {24, 25, 26, 27};
 		int green_right[4] = {28, 29, 30, 31};
+		hardware[0] = 0;
+		hardware[1] = 0;
+		hardware[2] = 0;
+		hardware[3] = 1;
 		
+
 		//open == 0 means open sides 1 and 2 (opposite paths)
 		//open == 2 means open sides 3 and 4 (opposite paths)
 		int open = 0;
-
-		//Reset all bits on x30
-		asm volatile(
-			"andi x30, x30, 0x0\n\t" //x30 & 0 and store in x30
-			:
-			:
-			: "x30" //This specifies that x30 is being changed after this instruction
-		);
 		
 		//Masked value to turn on all red lights		
 		int pin_mask = 0;
-		for(int i = 0; i < 4; i++)
-			pin_mask |= 1 << red[i] | 1 << red_right[i];
-
-		//Turn on all red lights
-		asm volatile(
-			"ori x30, x30, %0\n\t" //x30 or pin_mask and store in x30 (%0 means go to first input that is given)
-			:
-			: "i"(pin_mask)
-			: "x30"
-		);
+		for(int i = 8; i <= 15; i++)
+            hardware[i] = 1;
 
 		int rand = randomNumber(0, 3);
 		int on = 0;
-		
+		print();
 		while(1)
 		{
 			int count = 0;
 			for(int i = 0; i < 4; i++)
-				if(getValue(sensors[0]) || getValue(sensors_right[0]))
+				if(getValue(sensors[i]) || getValue(sensors_right[i]))
 					count++;
-			
 			if(count != 0)
 			{
 				if(on)
@@ -431,8 +438,10 @@ int main(void)
 					turnOff(red[rand]);
 					turnOn(green[rand]);
 					on = 1;
+					print();
 				}
 			}
+			break;
 		}
     return 0;
 }
