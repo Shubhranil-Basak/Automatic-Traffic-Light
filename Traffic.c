@@ -20,12 +20,14 @@ for(int i = 0; i < 32; i++){
 
 void print(){
     for(int i = 8, j = 1; i <= 11; i++, j++){
-		if(hardware[i]){
-	        	printf("Red light straight at side %d is on\n", j);
+	    if(hardware[i]){
+		    printf("Red light straight at side %d is on\n", j);
 		}
     }
     for(int i = 12, j = 1; i <= 15; i++, j++){
-        printf("%d Red light right at side %d\n", hardware[i], j);
+	    if(hardware[i]){
+		    printf("%d Red light right at side %d\n", hardware[i], j);
+	    }
     }
     for(int i = 16, j = 1; i <= 19; i++, j++){
         printf("%d Yellow light straight at side %d\n", hardware[i], j);
