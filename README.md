@@ -826,7 +826,7 @@ int main(void)
 
 # Screenshot
 
-
+![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/144095577/99e03b2b-898a-4eab-94e5-ef1cac09c7cb)
 
 
 # Citations
