@@ -112,7 +112,7 @@ void call(int[], int[], int[], int[], int[], int[], int[], int[], int);
 int hardware[32];
 
 
-
+//This function when called, will provide the Side Number and direction(right or stright) when they are turned on.
 void print(){
     for(int i = 8, j = 1; i <= 11; i++, j++){
 		if(hardware[i])
