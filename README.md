@@ -16,7 +16,7 @@ An IR Sensor consists of an IR LED trasmitter that emits infrared radition. It h
 
 When using an IR transmitter and receiver, the wavelength of the receiver must match that of the transmitter because the infrared photodiode is activated by the infrared light produced by the infrared LED. The photodiode’s resistance and the change in output voltage are proportional to the amount of infrared light obtained.
 
-![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/148491110/366e8026-2149-45f1-b9e1-da7485ef315f)
+![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/144095577/dd21f4aa-b0f3-4a6a-9c71-0b6cb3cbec00)
 
 
 # REGISTER ARCHITECTURE for x30 for GPIOs
