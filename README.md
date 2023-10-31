@@ -452,7 +452,7 @@ int main(void)
 				}
 			}
 			break; 	 //This break is to prevent an infinite loop
-				
+				//This loop will stop just after one itteration.
 		}
     return 0;
 }
