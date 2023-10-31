@@ -442,8 +442,8 @@ int main(void)
 
 ```C
 //This code is not a assembly structure
-//This code can be run to check whether the code is required
-//outputs according to the given inputs.
+//This code can be run to check whether the code is providing
+//the required outputs according to the given inputs.
 
 #include <time.h>
 #include <stdio.h>
