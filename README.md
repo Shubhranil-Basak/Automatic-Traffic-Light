@@ -111,6 +111,8 @@ void perform(int[], int[], int[], int[], int[], const int, int, int[]);
 void call(int[], int[], int[], int[], int[], int[], int[], int[], int);
 int hardware[32];
 
+
+
 void print(){
     for(int i = 8, j = 1; i <= 11; i++, j++){
 		if(hardware[i])
@@ -118,23 +120,23 @@ void print(){
     }
     for(int i = 12, j = 1; i <= 15; i++, j++){
 		if(hardware[i])
-        	printf("%d Red light right at side %d\n", hardware[i], j);
+        	printf("%d Red light right at side %d is on\n", hardware[i], j);
     }
     for(int i = 16, j = 1; i <= 19; i++, j++){
 		if(hardware[i])
-        	printf("%d Yellow light straight at side %d\n", hardware[i], j);
+        	printf("%d Yellow light straight at side %d is on\n", hardware[i], j);
     }
     for(int i = 20, j = 1; i <= 23; i++, j++){
 		if(hardware[i])
-        	printf("%d Yellow light right at side %d\n", hardware[i], j);
+        	printf("%d Yellow light right at side %d is on\n", hardware[i], j);
     }
     for(int i = 24, j = 1; i <= 27; i++, j++){
 		if(hardware[i])
-        	printf("%d Green light straight at side %d\n", hardware[i], j);
+        	printf("%d Green light straight at side %d is on\n", hardware[i], j);
     }
     for(int i = 28, j = 1; i <= 31; i++, j++){
 		if(hardware[i])
-        	printf("%d Green light right at side %d\n", hardware[i], j);
+        	printf("%d Green light right at side %d is on\n", hardware[i], j);
     }
 
 	printf("\n\n");
@@ -385,6 +387,8 @@ int main(void)
 		int yellow_right[4] = {20, 21, 22, 23};
 		int green[4] = {24, 25, 26, 27};
 		int green_right[4] = {28, 29, 30, 31};
+		//This is a condition where the Green light on Side4 is forced to be turned on initially.
+		//This can be changed to other conditions for debugginf purposes of any specific Side/LED.
 		hardware[0] = 0;
 		hardware[1] = 0;
 		hardware[2] = 0;
