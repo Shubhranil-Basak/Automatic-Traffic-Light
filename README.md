@@ -821,6 +821,7 @@ int main(void)
 # COMPILE AND RUN THE C CODE
 
 gcc Traffic.c
+
 ./a.out
 
 # SCREENSHOTS
@@ -839,6 +840,7 @@ gcc Traffic.c
 # ASSEMBLY CODE CONVERSION
 
 riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./out TrafficSignalController.c
+
 riscv64-unknown-elf-objdump -d -r out > TrafficSignalControllerAssembly.txt
 
 # ASSEMBLY CODE
