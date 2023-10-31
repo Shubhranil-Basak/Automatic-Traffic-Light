@@ -87,7 +87,7 @@ x30[30] is an output pin for a Green LED for Side 3 for going right.
 
 x30[31] is an output pin for a Green LED for Side 4 for going right.
 
-### ASSEMBLY STRUCTURE USING C
+### ASSEMBLY CODE USING C
 
 ```C
 /* 
