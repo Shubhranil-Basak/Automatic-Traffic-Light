@@ -302,7 +302,7 @@ int main(void)
 		{
 			int count = 0;
 			for(int i = 0; i < 4; i++)
-				if(getValue(sensors[0]) || getValue(sensors_right[0]))
+				if(getValue(sensors[i]) || getValue(sensors_right[i]))
 					count++;
 			
 			if(count != 0)
