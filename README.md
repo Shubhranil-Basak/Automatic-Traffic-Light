@@ -1817,6 +1817,36 @@ Disassembly of section .text:
    10f08:	fef42023          	sw	a5,-32(s0)
    10f0c:	c39ff06f          	j	10b44 <main+0x1d8>
    ```
+###NUMBER OF DIFFERENT INSTRUCTIONS: 27
+```
+addi
+sw
+li
+mv
+lw
+ret
+sll
+or
+nop
+not
+and
+sra
+andi
+jal
+j
+bne
+beqz
+slli
+add
+sub
+blt
+bge
+bnez
+lui
+beq
+srai
+srli
+```
 ### CITATIONS
 1) _Infrared (IR) Sensor Module with Arduino_. Solarduino. 12 Jan. 2020. [encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU](encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU). Accessed 30 Oct. 2023.
 2) _IR Sensor Working_. Robocraze. [robocraze.com/blogs/post/ir-sensor-working](robocraze.com/blogs/post/ir-sensor-working). Accessed 30 Oct. 2023.
