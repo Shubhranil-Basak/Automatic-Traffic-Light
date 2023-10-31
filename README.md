@@ -97,6 +97,7 @@ x30[31] is an output pin for a Green LED for Side 4 for going right.
 
 // This code can be run in the terminal to check the outputs of the sensors and LEDs.
 // The code without standard input/output like scanf and pritf can be found in the TrafficSignalControler.c file.
+//Source for TrafficSignalControler.c : https://github.com/AryanAAB/Automatic-Traffic-Light/blob/main/TrafficSignalController.c
 
 int randomNumber(int, int);
 void turnOn(int);
