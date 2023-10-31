@@ -115,16 +115,19 @@ int hardware[32];
 //This function when called, will provide the Side Number and direction(right or stright) when they are turned on.
 void print(){
     for(int i = 8, j = 1; i <= 11; i++, j++){
-		if(hardware[i])
-	        printf("Red light straight at side %d is on\n", j);
+		if(hardware[i]){
+	        	printf("Red light straight at side %d is on\n", j);
+		}
     }
     for(int i = 12, j = 1; i <= 15; i++, j++){
-		if(hardware[i])
-        	printf("%d Red light right at side %d is on\n", hardware[i], j);
+		if(hardware[i]){
+        		printf("%d Red light right at side %d is on\n", hardware[i], j);
+		}
     }
     for(int i = 16, j = 1; i <= 19; i++, j++){
-		if(hardware[i])
-        	printf("%d Yellow light straight at side %d is on\n", hardware[i], j);
+		if(hardware[i]){
+        		printf("%d Yellow light straight at side %d is on\n", hardware[i], j);
+		}
     }
     for(int i = 20, j = 1; i <= 23; i++, j++){
 		if(hardware[i])
