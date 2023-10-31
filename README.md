@@ -387,13 +387,14 @@ int main(void)
 		int yellow_right[4] = {20, 21, 22, 23};
 		int green[4] = {24, 25, 26, 27};
 		int green_right[4] = {28, 29, 30, 31};
+
 		//This is a condition where the Green light on Side4 is forced to be turned on initially.
 		//This can be changed to other conditions for debugginf purposes of any specific Side/LED.
 		hardware[0] = 0;
 		hardware[1] = 0;
 		hardware[2] = 0;
 		hardware[3] = 1;
-		
+		//This code will turn on the Green LED to go stright 
 
 		//open == 0 means open sides 1 and 2 (opposite paths)
 		//open == 2 means open sides 3 and 4 (opposite paths)
