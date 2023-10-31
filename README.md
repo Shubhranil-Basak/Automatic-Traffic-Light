@@ -432,7 +432,7 @@ int main(void)
 }
 ```
 
-# NON_ASSEMBLY CODE USING C
+# NON-ASSEMBLY CODE USING C
 
 ```C
 //This code is not a assembly structure
