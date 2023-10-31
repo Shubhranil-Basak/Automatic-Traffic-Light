@@ -309,7 +309,12 @@ int main(void)
 		hardware[2] = 0;
 		hardware[3] = 1;
 		// Above code will set all LEDs of all lanes to red except for Lane4 straight road.
-	
+
+		// hardware[4] = 0;
+		// hardware[5] = 1;
+		// hardware[6] = 0;
+		// hardware[7] = 0;
+		// The above code will make the lane2 right turn LED green and all other LEDs to red
 		
 		
 		
