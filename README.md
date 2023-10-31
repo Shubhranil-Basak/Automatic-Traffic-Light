@@ -1817,7 +1817,7 @@ Disassembly of section .text:
    10f08:	fef42023          	sw	a5,-32(s0)
    10f0c:	c39ff06f          	j	10b44 <main+0x1d8>
    ```
-###NUMBER OF DIFFERENT INSTRUCTIONS: 27
+### NUMBER OF DIFFERENT INSTRUCTIONS: 27
 ```
 addi
 sw
