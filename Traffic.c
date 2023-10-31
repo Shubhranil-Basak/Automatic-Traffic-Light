@@ -30,7 +30,9 @@ void print(){
 	    }
     }
     for(int i = 16, j = 1; i <= 19; i++, j++){
-        printf("%d Yellow light straight at side %d\n", hardware[i], j);
+	    if(hardware[i]){
+		    printf("%d Yellow light straight at side %d\n", hardware[i], j);
+	    }
     }
     for(int i = 20, j = 1; i <= 23; i++, j++){
         printf("%d Yellow light right at side %d\n", hardware[i], j);
