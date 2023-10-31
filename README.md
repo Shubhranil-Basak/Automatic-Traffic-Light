@@ -90,29 +90,28 @@ x30[31] is an output pin for a Green LED for Side 4 for going right.
 # Assembly Structure using C
 
 ```C
-#include <time.h>
-#include <stdlib.h>
-
-int randomNumber(int, int);
+/* 
+ * In this code to simulate time, we assume that one iteration of any while loop is 1ms
+ * Therefore, 1s = 1000 ms = 1000 iterations.
+ */
+ 
+int priority();
 void turnOn(int);
 void turnOff(int);
 int getValue(int);
-void turnOnYellow(int *, int, int, int *, time_t *);
+void turnOnYellow(int *, int, int, int *);
 void turnOffLight(int *, int, int, int *);
-void turnOffRandomLight(int, int, int);
+void turnOffPriorityLight(int, int, int);
 void ONLimit(int[], int[], int[], int[], int[]);
 void perform(int[], int[], int[], int[], int[], const int, int, int[]);
 void call(int[], int[], int[], int[], int[], int[], int[], int[], int);
 
 /*
- * Outputs a random number between lower and upper.
- * @param lower : lower bound
- * @param upper : upper bound
+ * This returns the lane which has priority. That is, it represents the lane that should be green when there is no traffic.
  */
-int randomNumber(int lower, int upper)
+int priority()
 {
-    srand(time(NULL));
-    return (rand() % (upper - lower + 1));
+	return 0; //We are giving side 1 has priority
 }
 
 /*
@@ -123,9 +122,9 @@ void turnOn(int port)
 {
 	int pin_mask = 1 << port;
 	asm volatile(
-		"ori x30, x30, %0\n\t"
+		"or x30, x30, %0\n\t"
 		:
-		: "i"(pin_mask)
+		: "r"(pin_mask)
 		: "x30"
 	);
 }
@@ -138,9 +137,9 @@ void turnOff(int port)
 {
 	int pin_mask = ~(1 << port);
 	asm volatile(
-		"andi x30, x30, %0\n\t"
+		"and x30, x30, %0\n\t"
 		:
-		: "i"(pin_mask)
+		: "r"(pin_mask)
 		: "x30"
 	);
 }
@@ -168,15 +167,13 @@ int getValue(int port)
  * @param greenLED : port of the green LED
  * @param yellowLED : port of the yellow LED
  * @param yellow : pointer to the number that says that yellow is on/off
- * @param yellowStart : pointer to a time object that will start the time of yellow
  */
-void turnOnYellow(int * green, int greenLED, int yellowLED, int * yellow, time_t * yellowStart)
+void turnOnYellow(int * green, int greenLED, int yellowLED, int * yellow)
 {
 	*green = 0;
 	turnOff(greenLED);
 	turnOn(yellowLED);
 	*yellow = 1;
-	*yellowStart = time(NULL);
 }
 
 /*
@@ -195,22 +192,19 @@ void turnOffLight(int * lightOff, int lightOffLED, int lightOnLED, int * lightOn
 }
 
 /* 
- * Turns off the random light that is used when there is no traffic.
+ * Turns off the priority light that is used when there is no traffic.
  * @param red: the port of the red light
  * @param yellow: the port of the yellow light
  * @param green: the port of the green light
  */
-void turnOffRandomLight(int red, int yellow, int green)
+void turnOffPriorityLight(int red, int yellow, int green)
 {
-	time_t startTime, currTime;
-	
-	startTime = time(NULL);
-	currTime = time(NULL);
+	int counter = 0;
 	
 	turnOff(green);
 	turnOn(yellow);
-	while(difftime(currTime, startTime) <= 1)
-		currTime = time(NULL);
+	while(counter != 1000)
+		counter++;
 	
 	turnOff(yellow);
 	turnOn(red);
@@ -248,8 +242,7 @@ void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
  */
 void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[], const int LIMIT, int goStraight, int greenOn[])
 {
-	time_t startTime, currentTime;
-	startTime = time(NULL);
+	int counter = 0;
 		
 	//If going right, then pos = 1; otherwise = 0
 	int pos = 1;
@@ -266,7 +259,7 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 	//If yellow light is on then value is 1; otherwise it is 0
 	int yellow1 = 0, yellow2 = 0;
 	//We need to store the time when yellow light was turned on
-	time_t yellow1Start, yellow2Start;
+	int yellowCounter1 = 0, yellowCounter2 = 0;
 		
 	if(goStraight && greenOn[0])
 	{
@@ -284,23 +277,19 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 	if(getValue(sensor2[pos]))
 		turnOffLight(&red2, red[pos + 2], green[pos + 2], &green2);
 		
-	currentTime = time(NULL);
-		
 	//After this loop, only red light would be turned on if you want to go straight.
 	//If you want to go right, it is possible that the going straight light would be on.
 	//However, going right light would be off.
 	while(!red1 || !red2)
 	{
-		if(green1 && (getValue(sensor1[pos]) == 0 || difftime(currentTime, startTime) >= LIMIT))
-			turnOnYellow(&green1, green[pos], yellow[pos], &yellow1, &yellow1Start);
-		if(green2 && (getValue(sensor2[pos]) == 0 || difftime(currentTime, startTime) >= LIMIT))
-			turnOnYellow(&green2, green[pos + 2], yellow[pos + 2], &yellow2, &yellow2Start);
+		if(green1 && (getValue(sensor1[pos]) == 0 || counter >= LIMIT * 1000))
+			turnOnYellow(&green1, green[pos], yellow[pos], &yellow1);
+		if(green2 && (getValue(sensor2[pos]) == 0 || counter >= LIMIT * 1000))
+			turnOnYellow(&green2, green[pos + 2], yellow[pos + 2], &yellow2);
 
-		currentTime = time(NULL);
-
-		if(yellow1 && difftime(currentTime, yellow1Start) >= 1)
+		if(yellow1 && yellowCounter1 >= 1 * 1000)
 			turnOffLight(&yellow1, yellow[pos], red[pos], &red1);
-		if(yellow2 && difftime(currentTime, yellow2Start) >= 1)
+		if(yellow2 && yellowCounter2 >= 1 * 1000)
 			turnOffLight(&yellow2, yellow[pos + 2], red[pos + 2], &red2);
 			
 		//If this function performs for going right and the opposite lane already stopped going right then open up going straight for this side
@@ -318,6 +307,12 @@ void perform(int sensor1[], int sensor2[], int red[], int yellow[], int green[],
 			turnOff(red[2]);
 			turnOn(green[2]);
 		}
+		counter++;
+		
+		if(yellow1)
+			yellowCounter1++;
+		if(yellow2)
+			yellowCounter2++;
 	}
 		
 	greenOn[0] = done1;
@@ -381,13 +376,13 @@ int main(void)
 
 		//Turn on all red lights
 		asm volatile(
-			"ori x30, x30, %0\n\t" //x30 or pin_mask and store in x30 (%0 means go to first input that is given)
+			"or x30, x30, %0\n\t" //x30 or pin_mask and store in x30 (%0 means go to first input that is given)
 			:
-			: "i"(pin_mask)
+			: "r"(pin_mask)
 			: "x30"
 		);
 
-		int rand = randomNumber(0, 3);
+		int priorityLane = priority();
 		int on = 0;
 		
 		while(1)
@@ -401,9 +396,8 @@ int main(void)
 			{
 				if(on)
 				{
-					turnOffRandomLight(red[rand], yellow[rand], green[rand]);
+					turnOffPriorityLight(red[priorityLane], yellow[priorityLane], green[priorityLane]);
 					on = 0;
-					rand = randomNumber(0, 3);
 				}
 				if(count == 4 || count == 3)
 				{
@@ -428,8 +422,8 @@ int main(void)
 			{
 				if(!on)
 				{
-					turnOff(red[rand]);
-					turnOn(green[rand]);
+					turnOff(red[priorityLane]);
+					turnOn(green[priorityLane]);
 					on = 1;
 				}
 			}
