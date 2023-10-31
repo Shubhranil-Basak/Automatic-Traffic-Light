@@ -1,17 +1,17 @@
 # AUTOMATIC TRAFFIC LIGHT
 This repository contains RISC-V based traffic light automation.
-# OVERVIEW
+### OVERVIEW
 Traffic lights usually consists of three signals through the usage of colors, arrows, and other images to convey various messages. Traffic lights are in sets of red, yellow, and green lights at intersection of roads. Traffic is then controlled as vehicles receive signals/messages of when to stop and when to go.
-# AIM
+### AIM
 The project's goal is to design an automatic machine utilizing a specialized RISC-V processor for controlling traffic by releasing a specific number of cars and pedestrians depending on whoever comes first. The objective of this program is to minimize traffic problems, energy consumption, and overall expenses. 
-# BLOCK DIAGRAM 
+### BLOCK DIAGRAM 
 <img width="810" alt="Block Diagram" src="https://github.com/AryanAAB/Automatic-Traffic-Light/assets/142584708/0538173c-416c-49be-acfe-d18c96bad4db">
 
-# MATERIALS REQUIRED
+### MATERIALS REQUIRED
 LED : https://tinyurl.com/yc5w423x : ₹125
 
 IR Sensors : https://tinyurl.com/8dybpmhn : ₹510
-# HOW DOES AN IR SENSOR WORK?
+### HOW DOES AN IR SENSOR WORK?
 An IR Sensor consists of an IR LED trasmitter that emits infrared radition. It has the same appearance as a standard LED, but the radiation it emits is not visible to the human eye. If an object blocks the pathway of the infrared waves, then the reflected radiations are detected by the infrared receivers. The sensor output can be decided by the IR receiver depending on the intensity of the response. These infrared receivers are available in photodiode form. IR photodiode are different from regular photodiodes in that they only detect IR radiation. Different types of infrared receivers exist based on voltage, wavelength, package, and other factors.
 
 When using an IR transmitter and receiver, the wavelength of the receiver must match that of the transmitter because the infrared photodiode is activated by the infrared light produced by the infrared LED. The photodiode’s resistance and the change in output voltage are proportional to the amount of infrared light obtained.
@@ -19,7 +19,7 @@ When using an IR transmitter and receiver, the wavelength of the receiver must m
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/144095577/dd21f4aa-b0f3-4a6a-9c71-0b6cb3cbec00)
 
 
-# REGISTER ARCHITECTURE FOR x30 FOR GPIOs
+### REGISTER ARCHITECTURE FOR x30 FOR GPIOs
 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/148491110/c6fd4ddc-8b65-4447-9a75-fb0c106bfc71)
 
@@ -87,7 +87,7 @@ x30[30] is an output pin for a Green LED for Side 3 for going right.
 
 x30[31] is an output pin for a Green LED for Side 4 for going right.
 
-# ASSEMBLY STRUCTURE USING C
+### ASSEMBLY STRUCTURE USING C
 
 ```C
 /* 
@@ -432,7 +432,7 @@ int main(void)
 }
 ```
 
-# NON-ASSEMBLY CODE USING C
+### NON-ASSEMBLY CODE USING C
 
 ```C
 //This code is not a assembly structure
@@ -818,13 +818,13 @@ int main(void)
 
 ```
 
-# COMPILE AND RUN THE C CODE
+### COMPILE AND RUN THE C CODE
 
 gcc Traffic.c
 
 ./a.out
 
-# SCREENSHOTS
+### SCREENSHOTS
 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/144095577/99e03b2b-898a-4eab-94e5-ef1cac09c7cb)
 
@@ -837,13 +837,13 @@ gcc Traffic.c
 * All the other lines in set of 8 are the same thing and it will be the same.
 * This code will run for 5 seconds.
 
-# ASSEMBLY CODE CONVERSION
+### ASSEMBLY CODE CONVERSION
 
 riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -ffreestanding -nostdlib -o ./out TrafficSignalController.c
 
 riscv64-unknown-elf-objdump -d -r out > TrafficSignalControllerAssembly.txt
 
-# ASSEMBLY CODE
+### ASSEMBLY CODE
 
 ```
 
@@ -1817,7 +1817,7 @@ Disassembly of section .text:
    10f08:	fef42023          	sw	a5,-32(s0)
    10f0c:	c39ff06f          	j	10b44 <main+0x1d8>
    ```
-# CITATIONS
+### CITATIONS
 1) _Infrared (IR) Sensor Module with Arduino_. Solarduino. 12 Jan. 2020. [encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU](encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU). Accessed 30 Oct. 2023.
 2) _IR Sensor Working_. Robocraze. [robocraze.com/blogs/post/ir-sensor-working](robocraze.com/blogs/post/ir-sensor-working). Accessed 30 Oct. 2023.
 3) ShubhamGitHub528. “Automatic Garage Door System.” _Home Automation System_. Github. 28 Oct. 2023. [github.com/ShubhamGitHub528/Home-Automation-System](github.com/ShubhamGitHub528/Home-Automation-System). 
