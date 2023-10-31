@@ -93,7 +93,11 @@ x30[31] is an output pin for a Green LED for Side 4 for going right.
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+
 // This code can be run in the terminal to check the outputs of the sensors and LEDs.
+// The code without standard input/output like scanf and pritf can be found in the TrafficSignalControler.c file.
+
 int randomNumber(int, int);
 void turnOn(int);
 void turnOff(int);
