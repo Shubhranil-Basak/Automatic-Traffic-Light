@@ -831,6 +831,8 @@ int main(void)
 * In the first 4 line we can see that right turn red is on for all the lanes
 * In line 5 we can see that yellow light is on for lane 4 straight
 * This is because as Green light for lane 4 was on at the beginning
+* And the sensor did not return any response as it did not detect any car
+* Thus it instantly changes to yellow.
 * In the next 3 line red light for the straight road is on for lane 1, 2 and 3 but not for lane 4
 * All the other lines in set of 8 are the same thing and it will be the same.
 * This code will run for 5 seconds.
