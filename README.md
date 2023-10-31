@@ -827,6 +827,7 @@ int main(void)
 # Screenshot
 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/144095577/99e03b2b-898a-4eab-94e5-ef1cac09c7cb)
+
 In the first 4 line we can see that right turn red is on for all the lanes
 In line 5 we can see that yellow light is on for lane 4 straight
 This is because as Green light for lane 4 was on at the beginning
