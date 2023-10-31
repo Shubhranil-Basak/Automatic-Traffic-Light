@@ -165,8 +165,8 @@ void turnOffRandomLight(int red, int yellow, int green)
  */
 void ONLimit(int sensor1[], int sensor2[], int red[], int yellow[], int green[])
 {
-	const int RIGHT_TIME_LIMIT = 5;
-	const int STRAIGHT_TIME_LIMIT = 5;
+	const int RIGHT_TIME_LIMIT = 5; //Standard RIGHT_TIME_LIMIT is 15 sec
+	const int STRAIGHT_TIME_LIMIT = 5; //Standard STRAIGHT_TIME_LIMIT is 45 sec
 	
 	int greenOn[2] = {0, 0};
 	
@@ -302,10 +302,16 @@ int main(void)
 		int yellow_right[4] = {20, 21, 22, 23};
 		int green[4] = {24, 25, 26, 27};
 		int green_right[4] = {28, 29, 30, 31};
+		// This part of the hardware function is hardcoded
+		// This is to check wether the code is working properly or not
 		hardware[0] = 0;
 		hardware[1] = 0;
 		hardware[2] = 0;
 		hardware[3] = 1;
+		// Above code will set all LEDs of all lanes to red except for Lane4 straight road.
+	
+		
+		
 		
 
 		//open == 0 means open sides 1 and 2 (opposite paths)
