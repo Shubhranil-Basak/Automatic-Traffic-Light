@@ -1,3 +1,7 @@
+//This code is not a assembly structure
+//This code can be run to check whether the code is required
+//outputs according to the given inputs.
+
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
