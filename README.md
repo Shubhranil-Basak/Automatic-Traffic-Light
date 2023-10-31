@@ -464,7 +464,7 @@ for(int i = 0; i < 32; i++){
 	hardware[i] = 0;
 }
 
-//This function will print the Side/Lane number along with the direction i.e. Straight or Right if the LED for those Sideis on.
+//This function will print the Side/Lane number along with the direction i.e. Straight or Right if the LED for those Sideis are on.
 void print(){
     for(int i = 8, j = 1; i <= 11; i++, j++){
 	    if(hardware[i]){
