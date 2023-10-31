@@ -451,7 +451,8 @@ int main(void)
 					print();
 				}
 			}
-			break;
+			break; 	 //This break is to prevent an infinite loop
+				
 		}
     return 0;
 }
