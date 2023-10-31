@@ -45,7 +45,9 @@ void print(){
 	    }
     }
     for(int i = 28, j = 1; i <= 31; i++, j++){
-        printf("%d Green light right at side %d\n", hardware[i], j);
+	    if(hardware[i]){
+		    printf("%d Green light right at side %d\n", hardware[i], j);
+	    }
     }
 
 	printf("\n\n");
