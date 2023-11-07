@@ -1920,7 +1920,6 @@ sll
 or
 nop
 ret
-
 not
 and
 mv
