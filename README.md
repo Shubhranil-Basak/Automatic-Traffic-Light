@@ -5,7 +5,7 @@ Traffic lights usually consists of three signals through the usage of colors, ar
 ### AIM
 The project's goal is to design an automatic machine utilizing a specialized RISC-V processor for controlling traffic by releasing a specific number of cars and pedestrians depending on whoever comes first. The objective of this program is to minimize traffic problems, energy consumption, and overall expenses. 
 ### BLOCK DIAGRAM 
-<img width="810" alt="Block Diagram" src="https://github.com/AryanAAB/Automatic-Traffic-Light/assets/142584708/0538173c-416c-49be-acfe-d18c96bad4db">
+![Block Diagram](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/142584708/7f56479b-aab5-4d16-8394-f79927c6e400)
 
 ### MATERIALS REQUIRED
 LED : https://tinyurl.com/yc5w423x : ₹125
