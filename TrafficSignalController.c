@@ -3,7 +3,8 @@
  * Therefore, 1s = 1000 ms = 1000 iterations.
  * If nobody is present at the signals, this code would give priority to side 1
  */
- 
+
+//Function prototypes
 void turnOn(const int);
 void turnOff(const int);
 int getValue(const int);
