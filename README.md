@@ -466,6 +466,8 @@ int main(void)
 //This code is not a assembly structure
 //This code can be run to check whether the code is providing
 //the required outputs according to the given inputs.
+//We used time library for testing purposes
+//In the original C code, we used a counter instead
 
 #include <time.h>
 #include <stdio.h>
@@ -481,6 +483,9 @@ void turnOffRandomLight(int, int, int);
 void ONLimit(int[], int[], int[], int[], int[]);
 void perform(int[], int[], int[], int[], int[], const int, int, int[]);
 void call(int[], int[], int[], int[], int[], int[], int[], int[], int);
+
+//We used a hardware array for ease of the testing process
+
 int hardware[32];
 for(int i = 0; i < 32; i++){
 	hardware[i] = 0;
