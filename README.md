@@ -1910,32 +1910,32 @@ Disassembly of section .text:
    1101c:	fef42423          	sw	a5,-24(s0)
    11020:	a15ff06f          	j	10a34 <main+0x1b0>
 ```
-### NUMBER OF DIFFERENT INSTRUCTIONS: 27
+### NUMBER OF DIFFERENT INSTRUCTIONS: 26
 ```
 addi
 sw
-li
-mv
 lw
-ret
+li
 sll
 or
 nop
+ret
+
 not
 and
+mv
 sra
 andi
 jal
 j
 bne
 beqz
+bnez
 slli
-add
 sub
+add
 blt
 bge
-bnez
-lui
 beq
 srai
 srli
