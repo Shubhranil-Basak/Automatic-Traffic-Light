@@ -1947,6 +1947,8 @@ srli
 ### Spike Simulations
 Test Case 1 : No traffic on any lanes.
 
+Expected Output 1: Only green light of side 1 would be turned on. 
+
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/145079379/c6ef9c6e-39e9-4a0e-b2aa-30735940e491)
 
 ### CITATIONS
