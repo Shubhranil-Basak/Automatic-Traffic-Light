@@ -1944,11 +1944,6 @@ beq
 srai
 srli
 ```
-
-### All possible testcases
-
-
-
 ### Spike Simulations
 Test Case 1 : No traffic on any lanes.
 
@@ -1956,16 +1951,8 @@ Expected Output 1: Only green light of priority lane (default side 1) would be t
 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/145079379/c6ef9c6e-39e9-4a0e-b2aa-30735940e491)
 
-### CITATIONS
-1) _Infrared (IR) Sensor Module with Arduino_. Solarduino. 12 Jan. 2020. [encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU](encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU). Accessed 30 Oct. 2023.
-2) _IR Sensor Working_. Robocraze. [robocraze.com/blogs/post/ir-sensor-working](robocraze.com/blogs/post/ir-sensor-working). Accessed 30 Oct. 2023.
-3) Iswaryallanchezhiyan. "RISC-V-Digital-Alarm-Clock." _RISC-V-Digital-Alarm-Clock_. Github. 1 Nov. 2023. [https://github.com/IswaryaIlanchezhiyan/RISC-V-Digital-Alarm-Clock](https://github.com/IswaryaIlanchezhiyan/RISC-V-Digital-Alarm-Clock). Accessed 10 Nov. 2023. 
-4) ShubhamGitHub528. “Automatic Garage Door System.” _Home Automation System_. Github. 28 Oct. 2023. [github.com/ShubhamGitHub528/Home-Automation-System](github.com/ShubhamGitHub528/Home-Automation-System). Accessed 30 Oct. 2023.
 
-
-
-
-### testing(to be removed)
+### Testcases 
 |lane1   |lane1_right   |lane2   |lane2_right   |lane3   |lane3_right   |lane4   |lane4_right|
 |:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|:--------------:|
 |0	|0	|0	|0	|0	|0	|0	|0
@@ -2227,3 +2214,15 @@ Expected Output 1: Only green light of priority lane (default side 1) would be t
 
 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/144095577/692f568a-0907-48e7-a076-6edb326af722)
+
+### Citations
+
+1) _Infrared (IR) Sensor Module with Arduino_. Solarduino. 12 Jan. 2020. [encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU](encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU). Accessed 30 Oct. 2023.
+2) _IR Sensor Working_. Robocraze. [robocraze.com/blogs/post/ir-sensor-working](robocraze.com/blogs/post/ir-sensor-working). Accessed 30 Oct. 2023.
+3) KanisshR1. "RISC-V-Automatic-Sanitizer-Dispenser." _RISC-Automatic-Sanitizer-Dispenser_. Github. 31 Oct. 2023. [https://github.com/KanishR1/RISCV_Automatic-Sanitizer-Dispenser]
+   (https://github.com/KanishR1/RISCV_Automatic-Sanitizer-Dispenser). Accessed 10 Nov. 2023.
+4) Iswaryallanchezhiyan. "RISC-V-Digital-Alarm-Clock." _RISC-V-Digital-Alarm-Clock_. Github. 1 Nov. 2023. [https://github.com/IswaryaIlanchezhiyan/RISC-V-Digital-Alarm-Clock](https://github.com/IswaryaIlanchezhiyan/RISC-V-Digital-Alarm-Clock). Accessed 10 Nov. 2023.
+5 Nancy0192. "RISC-V-Blind-Sight-Aid." _RISC-V-Blind-Sight-Aid_. Github. 2 Nov. 2023. [https://github.com/Nancy0192/BlindSight_Aid](https://github.com/Nancy0192/BlindSight_Aid). Accessed 10 Nov. 2023.
+6) Shivangi2207. "RISC-V-Fire-Detector." _RISC-V-Fire-Detector_. Github. 2 Nov. 2023. [https://github.com/Shivangi2207/Fire_detector_RISCV.git](https://github.com/Shivangi2207/Fire_detector_RISCV.git). Accessed 10 Nov. 2023.
+7) ShubhamGitHub528. “Automatic Garage Door System.” _Home Automation System_. Github. 28 Oct. 2023. [github.com/ShubhamGitHub528/Home-Automation-System](github.com/ShubhamGitHub528/Home-Automation-System). Accessed 30 Oct. 2023.
+8) Y09mogal. "RISC-V-Heart-Rate-Monitor." _RISC-V-Heart-Rate-Monitor_. Github. 12 Oct. 2023. [github.com/ShubhamGitHub528/Home-Automation-System](https://github.com/Y09mogal/RISCV_Heart_Rate_Monitor). Accessed 10 Nov. 2023.
