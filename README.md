@@ -2213,7 +2213,6 @@ Expected Output 1: Only green light of priority lane (default side 1) would be t
 |1	|1	|1	|1	|1	|1	|1	|1
 
 
-![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/144095577/692f568a-0907-48e7-a076-6edb326af722)
 
 ### Citations
 
