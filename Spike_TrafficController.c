@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 /* 
  * In this code to simulate time, we assume that one iteration of any while loop is 1ms
  * Therefore, 1s = 1000 ms = 1000 iterations.
