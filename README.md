@@ -2750,9 +2750,8 @@ Expected Output 2: Green lights for those lanes at different times.
 
 1) _Infrared (IR) Sensor Module with Arduino_. Solarduino. 12 Jan. 2020. [encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU](encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKL49Fuzyarn4NJ6680l6UARhih-H7ZjiCjVlIlieX474dQUyhHMPB3w-tkls-Jas0f68&;usqp=CAU). Accessed 30 Oct. 2023.
 2) _IR Sensor Working_. Robocraze. [robocraze.com/blogs/post/ir-sensor-working](robocraze.com/blogs/post/ir-sensor-working). Accessed 30 Oct. 2023.
-3) KanisshR1. "RISC-V-Automatic-Sanitizer-Dispenser." _RISC-Automatic-Sanitizer-Dispenser_. Github. 31 Oct. 2023. [https://github.com/KanishR1/RISCV_Automatic-Sanitizer-Dispenser]
-   (https://github.com/KanishR1/RISCV_Automatic-Sanitizer-Dispenser). Accessed 10 Nov. 2023.
 4) Iswaryallanchezhiyan. "RISC-V-Digital-Alarm-Clock." _RISC-V-Digital-Alarm-Clock_. Github. 1 Nov. 2023. [https://github.com/IswaryaIlanchezhiyan/RISC-V-Digital-Alarm-Clock](https://github.com/IswaryaIlanchezhiyan/RISC-V-Digital-Alarm-Clock). Accessed 10 Nov. 2023.
+5) KanisshR1. "RISC-V-Automatic-Sanitizer-Dispenser." _RISC-Automatic-Sanitizer-Dispenser_. Github. 31 Oct. 2023. [https://github.com/KanishR1/RISCV_Automatic-Sanitizer-Dispenser](https://github.com/KanishR1/RISCV_Automatic-Sanitizer-Dispenser). Accessed 10 Nov. 2023.
 5 Nancy0192. "RISC-V-Blind-Sight-Aid." _RISC-V-Blind-Sight-Aid_. Github. 2 Nov. 2023. [https://github.com/Nancy0192/BlindSight_Aid](https://github.com/Nancy0192/BlindSight_Aid). Accessed 10 Nov. 2023.
 6) Shivangi2207. "RISC-V-Fire-Detector." _RISC-V-Fire-Detector_. Github. 2 Nov. 2023. [https://github.com/Shivangi2207/Fire_detector_RISCV.git](https://github.com/Shivangi2207/Fire_detector_RISCV.git). Accessed 10 Nov. 2023.
 7) ShubhamGitHub528. “Automatic Garage Door System.” _Home Automation System_. Github. 28 Oct. 2023. [github.com/ShubhamGitHub528/Home-Automation-System](github.com/ShubhamGitHub528/Home-Automation-System). Accessed 30 Oct. 2023.
