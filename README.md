@@ -1951,6 +1951,11 @@ Expected Output 1: Only green light of priority lane (default side 1) would be t
 
 ![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/145079379/c6ef9c6e-39e9-4a0e-b2aa-30735940e491)
 
+Test Case 2 : Cars wanting to go straight and to the right in lane 1, 4
+
+Expected Output 2: Green lights for those lanes at different times.
+
+![image](https://github.com/AryanAAB/Automatic-Traffic-Light/assets/145079379/e862c867-24f1-4662-962a-38e3e2577193)
 
 ### Testcases 
 |lane1   |lane1_right   |lane2   |lane2_right   |lane3   |lane3_right   |lane4   |lane4_right|
