@@ -1945,7 +1945,7 @@ srai
 srli
 ```
 ### Spike Code
-```
+```C
 #include <stdio.h>
 #include <stdlib.h>
 
