@@ -209,17 +209,17 @@ void perform(const int sensor1Straight, const int sensor1Right, const int sensor
 	//However, going right light would be off.
 	while(!red1 || !red2)
 	{
-		if(green1 && goStraight == 1 && (getValue(sensor1Straight) == 0 || counter >= LIMIT * 1000))
+		if(green1 && goStraight == 1 && (getValue(sensor1Straight) == 1 || counter >= LIMIT * 1000))
 			turnOnYellow(&green1, green1Straight, yellow1Straight, &yellow1);
 			
-		else if(green1 && goStraight == 0 && (getValue(sensor1Right) == 0 || counter >= LIMIT * 1000))
+		else if(green1 && goStraight == 0 && (getValue(sensor1Right) == 1 || counter >= LIMIT * 1000))
 			turnOnYellow(&green1, green1Right, yellow1Right, &yellow1);
 			
 		
-		if(green2 && goStraight == 1 && (getValue(sensor2Straight) == 0 || counter >= LIMIT * 1000))
+		if(green2 && goStraight == 1 && (getValue(sensor2Straight) == 1 || counter >= LIMIT * 1000))
 			turnOnYellow(&green2, green2Straight, yellow2Straight, &yellow2);
 		
-		else if(green2 && goStraight == 0 && (getValue(sensor2Right) == 0 || counter >= LIMIT * 1000))
+		else if(green2 && goStraight == 0 && (getValue(sensor2Right) == 1 || counter >= LIMIT * 1000))
 			turnOnYellow(&green2, green2Right, yellow2Right, &yellow2);
 
 		if(yellow1 && goStraight == 1 && yellowCounter1 >= 1 * 1000)
@@ -229,11 +229,11 @@ void perform(const int sensor1Straight, const int sensor1Right, const int sensor
 			turnOffLight(&yellow1, yellow1Right, red1Right, &red1);
 		
 		
-		if(yellow1 && goStraight == 1 && yellowCounter1 >= 1 * 1000)
-			turnOffLight(&yellow1, yellow1Straight, red1Straight, &red1);
+		if(yellow2 && goStraight == 1 && yellowCounter2 >= 1 * 1000)
+			turnOffLight(&yellow2, yellow2Straight, red2Straight, &red2);
 		
-		else if(yellow1 && goStraight == 0 && yellowCounter1 >= 1 * 1000)
-			turnOffLight(&yellow1, yellow1Right, red1Right, &red1);
+		else if(yellow2 && goStraight == 0 && yellowCounter2 >= 1 * 1000)
+			turnOffLight(&yellow2, yellow2Right, red2Right, &red2);
 			
 		//If this function performs for going right and the opposite lane already stopped going right then open up going straight for this side
 		if(!goStraight && red2 && !done1 && getValue(sensor1Straight))
