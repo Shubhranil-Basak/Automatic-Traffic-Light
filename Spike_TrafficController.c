@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 /* 
  * In this code to simulate time, we assume that one iteration of any while loop is 1ms
  * Therefore, 1s = 1000 ms = 1000 iterations.
@@ -15,6 +16,8 @@ void turnOffLight(int *, const int, const int, int *);
 void turnOffPriorityLight(const int, const int, const int);
 void ONLimit(const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int);
 void perform(const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, const int, int *, int *);
+void printRegister(void);
+void print(int);
 
 /*
  * Turns on the LED at port "port"
@@ -211,17 +214,18 @@ void perform(const int sensor1Straight, const int sensor1Right, const int sensor
 	//However, going right light would be off.
 	while(!red1 || !red2)
 	{
-		if(green1 && goStraight == 1 && (getValue(sensor1Straight) == 0 || counter >= LIMIT * 1000))
+		printRegister();
+		if(green1 && goStraight == 1 && (getValue(sensor1Straight) == 1 || counter >= LIMIT * 1000))
 			turnOnYellow(&green1, green1Straight, yellow1Straight, &yellow1);
 			
-		else if(green1 && goStraight == 0 && (getValue(sensor1Right) == 0 || counter >= LIMIT * 1000))
+		else if(green1 && goStraight == 0 && (getValue(sensor1Right) == 1 || counter >= LIMIT * 1000))
 			turnOnYellow(&green1, green1Right, yellow1Right, &yellow1);
 			
 		
-		if(green2 && goStraight == 1 && (getValue(sensor2Straight) == 0 || counter >= LIMIT * 1000))
+		if(green2 && goStraight == 1 && (getValue(sensor2Straight) == 1 || counter >= LIMIT * 1000))
 			turnOnYellow(&green2, green2Straight, yellow2Straight, &yellow2);
 		
-		else if(green2 && goStraight == 0 && (getValue(sensor2Right) == 0 || counter >= LIMIT * 1000))
+		else if(green2 && goStraight == 0 && (getValue(sensor2Right) == 1 || counter >= LIMIT * 1000))
 			turnOnYellow(&green2, green2Right, yellow2Right, &yellow2);
 
 		if(yellow1 && goStraight == 1 && yellowCounter1 >= 1 * 1000)
@@ -231,11 +235,11 @@ void perform(const int sensor1Straight, const int sensor1Right, const int sensor
 			turnOffLight(&yellow1, yellow1Right, red1Right, &red1);
 		
 		
-		if(yellow1 && goStraight == 1 && yellowCounter1 >= 1 * 1000)
-			turnOffLight(&yellow1, yellow1Straight, red1Straight, &red1);
+		if(yellow2 && goStraight == 1 && yellowCounter2 >= 1 * 1000)
+			turnOffLight(&yellow2, yellow2Straight, red2Straight, &red2);
 		
-		else if(yellow1 && goStraight == 0 && yellowCounter1 >= 1 * 1000)
-			turnOffLight(&yellow1, yellow1Right, red1Right, &red1);
+		else if(yellow2 && goStraight == 0 && yellowCounter2 >= 1 * 1000)
+			turnOffLight(&yellow2, yellow2Right, red2Right, &red2);
 			
 		//If this function performs for going right and the opposite lane already stopped going right then open up going straight for this side
 		if(!goStraight && red2 && !done1 && getValue(sensor1Straight))
@@ -278,8 +282,113 @@ void printRegister(void)
 	while(result != 0)
 	{
 		if(result & 1 == 1)
-			printf("%d is on", &index);
-		result >>= 1; 
+			print(index);
+		result >>= 1;
+		index++;
+	}
+}
+
+void print(int index)
+{
+	switch(index)
+	{
+
+		case 0:
+			printf("Car detected for going straight at side 1.\n");
+			break;
+		case 1:
+			printf("Car detected for going straight at side 2.\n");
+			break;
+		case 2:
+			printf("Car detected for going straight at side 3.\n");
+			break;
+		case 3:
+			printf("Car detected for going straight at side 4.\n");
+			break;
+		case 4:
+			printf("Car detected for going right at side 1.\n");
+			break;
+		case 5:
+			printf("Car detected for going right at side 2.\n");
+			break;
+		case 6:
+			printf("Car detected for going right at side 3.\n");
+			break;
+		case 7:
+			printf("Car detected for going right at side 4.\n");
+			break;
+		case 8:
+			printf("Straight Red Light Side 1 is on.\n");
+			break;
+		case 9:
+			printf("Straight Red Light Side 2 is on.\n");
+			break;
+		case 10:
+			printf("Straight Red Light Side 3 is on.\n");
+			break;
+		case 11:
+			printf("Straight Red Light Side 4 is on.\n");
+			break;
+		case 12:
+			printf("Right Red Light Side 1 is on.\n");
+			break;
+		case 13:
+			printf("Right Red Light Side 2 is on.\n");
+			break;
+		case 14:
+			printf("Right Red Light Side 3 is on.\n");
+			break;
+		case 15:
+			printf("Right Red Light Side 4 is on.\n");
+			break;
+		case 16:
+			printf("Straight Yellow Light Side 1 is on.\n");
+			break;
+		case 17:
+			printf("Straight Yellow Light Side 2 is on.\n");
+			break;
+		case 18:
+			printf("Straight Yellow Light Side 3 is on.\n");
+			break;
+		case 19:
+			printf("Straight Yellow Light Side 4 is on.\n");
+			break;
+		case 20:
+			printf("Right Yellow Light Side 1 is on.\n");
+			break;
+		case 21:
+			printf("Right Yellow Light Side 2 is on.\n");
+			break;
+		case 22:
+			printf("Right Yellow Light Side 3 is on.\n");
+			break;
+		case 23:
+			printf("Right Yellow Light Side 4 is on.\n");
+			break;
+		case 24:
+			printf("Straight Green Light Side 1 is on.\n");
+			break;
+		case 25:
+			printf("Straight Green Light Side 2 is on.\n");
+			break;
+		case 26:
+			printf("Straight Green Light Side 3 is on.\n");
+			break;
+		case 27:
+			printf("Straight Green Light Side 4 is on.\n");
+			break;
+		case 28:
+			printf("Right Green Light Side 1 is on.\n");
+			break;
+		case 29:
+			printf("Right Green Light Side 2 is on.\n");
+			break;
+		case 30:
+			printf("Right Green Light Side 3 is on.\n");
+			break;
+		case 31:
+			printf("Right Yellow Light Side 4 is on.\n");
+			break;
 	}
 }
 
@@ -290,7 +399,6 @@ int main(void)
 		//These are on x30
 		const int sensor1Straight = 0, sensor2Straight = 1, sensor3Straight = 2, sensor4Straight = 3;
 		const int sensor1Right = 4, sensor2Right = 5, sensor3Right = 6, sensor4Right = 7;
-		
 		//These are on x30
 		const int red1Straight = 8, red2Straight = 9, red3Straight = 10, red4Straight = 11;
 		const int red1Right = 12, red2Right = 13, red3Right = 14, red4Right = 15;
@@ -298,7 +406,6 @@ int main(void)
 		const int yellow1Right = 20,  yellow2Right = 21, yellow3Right = 22, yellow4Right = 23;
 		const int green1Straight = 24, green2Straight = 25, green3Straight = 26, green4Straight = 27;
 		const int green1Right = 28, green2Right = 29, green3Right = 30, green4Right = 31;
-		
 		//open == 0 means open sides 1 and 2 (opposite paths)
 		//open == 2 means open sides 3 and 4 (opposite paths)
 		int open = 0;
@@ -310,7 +417,7 @@ int main(void)
 			:
 			: "x30" //This specifies that x30 is being changed after this instruction
 		);
-		
+
 		//Masked value to turn on all red lights		
 		int pin_mask = 0;
 		pin_mask |= 1 << red1Straight | 1 << red1Right | 1 << red2Straight | 1 << red2Right | 1 << red3Straight | 1 << red3Right | 1 << red4Straight | 1 << red4Right;
@@ -325,16 +432,27 @@ int main(void)
 
 		int on = 0;
 		
-		int testCase = 0;
-		scanf("%d", &testCase);
+		int testCase = 1;
 		
+		//Random test cases
 		switch(testCase)
 		{
 			case 0:
 				//No light on 
-				break;	
+				break;
+			case 1:
+				//lane1 right on and lane4 straight and right on
+				pin_mask = 0;
+				pin_mask |= 1 << sensor1Right | 1 << sensor4Straight | 1 << sensor4Right | 1 << sensor1Straight;
+				asm volatile(
+					"or x30, x30, %0\n\t"
+					:
+					: "r"(pin_mask)
+					: "x30"	
+				);
+				break;
 		}
-		
+
 		int iterations = 0;
 		while(iterations != 200)
 		{
