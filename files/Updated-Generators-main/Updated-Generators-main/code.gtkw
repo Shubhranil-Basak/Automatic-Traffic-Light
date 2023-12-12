@@ -1,0 +1,17 @@
+[dumpfile] "/home/ubuntu/Updated-Generators/code.vcd"
+[dumpfile_size] 9285078
+[treeopen] top.
+@22
+bench.top.wrapper.read_flag
+bench.top.wrapper.csb_alu$1
+bench.top.wrapper.csb_mem
+bench.top.web$1
+bench.top.wrapper.wmask[3:0]
+bench.top.wrapper.alu_result[31:0]
+bench.top.wrapper.gpio_pins[31:0]
+bench.top.wrapper.output_pins[31:0]
+bench.top.wrapper.inst_mem_addr[7:0]
+bench.top.wrapper.inst_mem_rdata[31:0]
+bench.top.wrapper.data_mem_addr[7:0]
+bench.top.wrapper.data_mem_wdata[31:0]
+bench.top.wrapper.data_mem_rdata[31:0]

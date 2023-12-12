@@ -1,0 +1,27 @@
+
+led_new:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00010054 <main>:
+   10054:	fd010113          	addi	sp,sp,-48
+   10058:	02812623          	sw	s0,44(sp)
+   1005c:	03010413          	addi	s0,sp,48
+   10060:	fe042623          	sw	zero,-20(s0)
+   10064:	00100793          	li	a5,1
+   10068:	fef42423          	sw	a5,-24(s0)
+   1006c:	00200793          	li	a5,2
+   10070:	fef42223          	sw	a5,-28(s0)
+   10074:	00200793          	li	a5,2
+   10078:	fef42023          	sw	a5,-32(s0)
+   1007c:	fe042783          	lw	a5,-32(s0)
+   10080:	000f0513          	mv	a0,t5
+   10084:	00f577b3          	and	a5,a0,a5
+   10088:	fef42623          	sw	a5,-20(s0)
+   1008c:	fec42783          	lw	a5,-20(s0)
+   10090:	00579793          	slli	a5,a5,0x5
+   10094:	fcf42e23          	sw	a5,-36(s0)
+   10098:	00ff6f33          	or	t5,t5,a5
+   1009c:	fcf42e23          	sw	a5,-36(s0)
+   100a0:	fddff06f          	j	1007c <main+0x28>
